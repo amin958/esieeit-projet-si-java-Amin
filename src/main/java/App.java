@@ -1,4 +1,4 @@
-package com.esieeit.projetsi;
+package main.java;
 
 public class App {
     public static void main(String[] args) {
