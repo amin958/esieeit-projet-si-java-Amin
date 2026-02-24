@@ -1,4 +1,4 @@
-package main.java;
+package com.esieeit.projetsi; // Change ceci
 
 public class App {
     public static void main(String[] args) {
