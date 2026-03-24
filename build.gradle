@@ -1,31 +1,35 @@
 plugins {
     id 'java'
-    id 'application'
+    id 'org.springframework.boot' version '3.2.3'
+    id 'io.spring.dependency-management' version '1.1.6'
 }
 
 group = 'com.esieeit'
-version = '1.0-SNAPSHOT'
+version = '0.0.1-SNAPSHOT'
+// Utilisation de Java 17 (ou 21 si tu l'as installé)
+java {
+    sourceCompatibility = '17'
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    // JUnit 5 pour les tests
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // Les bases de l'API web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+    // Les outils pour la Base de données (JPA et Validation)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    
+    // Le pilote pour parler à MySQL
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    
+    // Pour les tests futurs
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(25) // ou 21 selon ta version
-    }
-}
-
-application {
-    mainClass = 'com.esieeit.projetsi.App'
-}
-
-test {
+tasks.named('test') {
     useJUnitPlatform()
 }
