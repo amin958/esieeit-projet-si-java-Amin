@@ -1,10 +1,14 @@
 package com.esieeit.projetsi.domain.model;
 
 import com.esieeit.projetsi.domain.enums.ProjectStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "projects")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Project {
 
     @Id
@@ -23,6 +27,7 @@ public class Project {
 
     // C'est ici qu'on fait le lien avec la table 'users' !
     // Plusieurs projets peuvent appartenir à UN seul propriétaire.
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
@@ -50,6 +55,7 @@ public class Project {
     public ProjectStatus getStatus() { return status; }
     public void setStatus(ProjectStatus status) { this.status = status; }
     
+    @JsonIgnore
     public User getOwner() { return owner; }
     public void setOwner(User owner) { this.owner = owner; }
 }

@@ -2,10 +2,14 @@ package com.esieeit.projetsi.domain.model;
 
 import com.esieeit.projetsi.domain.enums.TaskPriority;
 import com.esieeit.projetsi.domain.enums.TaskStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tasks")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Task {
 
     @Id
@@ -27,6 +31,7 @@ public class Task {
     private TaskPriority priority = TaskPriority.MEDIUM;
 
     // Clé étrangère vers le Projet
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
